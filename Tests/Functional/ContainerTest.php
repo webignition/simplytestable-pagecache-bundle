@@ -2,26 +2,13 @@
 
 namespace SimplyTestable\PageCacheBundle\Tests\Functional;
 
-use PHPUnit\Framework\TestCase;
 use SimplyTestable\PageCacheBundle\Command\ClearCommand;
 use SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory;
-use Symfony\Component\HttpKernel\KernelInterface;
 
-class ContainerTest extends TestCase
+class ContainerTest extends AbstractFunctionalTestCase
 {
-    /**
-     * @var KernelInterface
-     */
-    private $kernel;
-
-    protected function setUp()
-    {
-        $this->kernel = new AppKernel('test', true);
-        $this->kernel->boot();
-    }
-
     /**
      * @dataProvider getServicesFromContainerDataProvider
      *
@@ -30,7 +17,7 @@ class ContainerTest extends TestCase
      */
     public function testGetServicesFromContainer(string $serviceId, string $expectedServiceClassName)
     {
-        $service = $this->kernel->getContainer()->get($serviceId);
+        $service = $this->container->get($serviceId);
         $this->assertInstanceOf($expectedServiceClassName, $service);
     }
 
@@ -66,10 +53,5 @@ class ContainerTest extends TestCase
                 'expectedServiceClassName' => ClearCommand::class,
             ],
         ];
-    }
-
-    protected function tearDown()
-    {
-        $this->kernel->shutdown();
     }
 }
