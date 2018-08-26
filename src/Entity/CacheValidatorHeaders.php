@@ -84,6 +84,6 @@ class CacheValidatorHeaders
      */
     public function getETag()
     {
-        return md5($this->getIdentifier());
+        return md5($this->identifier);
     }
 }
