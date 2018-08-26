@@ -1,0 +1,6 @@
+services:
+  webignition\SimplyTestableUserManagerInterface\UserManagerInterface:
+    class: SimplyTestable\PageCacheBundle\Tests\Functional\FooUserManager
+
+  Doctrine\ORM\EntityManagerInterface:
+    class: SimplyTestable\PageCacheBundle\Tests\Functional\FooEntityManager

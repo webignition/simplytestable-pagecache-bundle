@@ -1,1 +1,26 @@
 services:
+  simplytestable_pagecache.cache_validator_headers_service:
+    class: SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+
+  SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService:
+    alias: simplytestable_pagecache.cache_validator_headers_service
+
+  simplytestable_pagecache.cache_validator_identifier_factory:
+    class: SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory
+    arguments:
+      - '@webignition\SimplyTestableUserManagerInterface\UserManagerInterface'
+
+  SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory:
+    alias: simplytestable_pagecache.cache_validator_identifier_factory
+
+  simplytestable_pagecache.cacheable_response_factory:
+    class: SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory
+    arguments:
+      - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService'
+      - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory'
+      - '@webignition\SimplyTestableUserManagerInterface\UserManagerInterface'
+
+  SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory:
+    alias: simplytestable_pagecache.cacheable_response_factory

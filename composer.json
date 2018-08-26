@@ -3,15 +3,19 @@
     "type": "symfony-bundle",
     "require": {
         "php": ">=7.2.0",
-        "symfony/http-kernel": "^4.1",
-        "symfony/dependency-injection": "^4.1",
+        "doctrine/doctrine-bundle": "^1.6",
+        "doctrine/orm": "^2.6",
         "symfony/config": "^4.1",
-        "doctrine/orm": "^2.6"
+        "symfony/dependency-injection": "^4.1",
+        "symfony/framework-bundle": "^4.1",
+        "symfony/http-kernel": "^4.1",
+        "symfony/yaml": "^4.1",
+        "webignition/simplytestable-usermanager-interface": "^0.1"
     },
     "require-dev": {
+        "mockery/mockery": "^1.0",
         "phpunit/phpunit": "~7.0",
-        "squizlabs/php_codesniffer": "3.*",
-        "mockery/mockery": "^1.0"
+        "squizlabs/php_codesniffer": "3.*"
     },
     "config": {
         "preferred-install": {
@@ -26,7 +30,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SimplyTestable\\PageCacheBundle\\Tests\\": "tests/"
+            "SimplyTestable\\PageCacheBundle\\Tests\\": "Tests/"
         }
     },
     "scripts": {
