@@ -2,8 +2,8 @@
 
 namespace SimplyTestable\PageCacheBundle\Tests\Functional;
 
-use Doctrine\DBAL\Connection;
 use PHPUnit\Framework\TestCase;
+use SimplyTestable\PageCacheBundle\Command\ClearCommand;
 use SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory;
@@ -60,6 +60,10 @@ class ContainerTest extends TestCase
             'CacheValidatorIdentifierFactory alias' => [
                 'serviceId' => CacheValidatorIdentifierFactory::class,
                 'expectedServiceClassName' => CacheValidatorIdentifierFactory::class,
+            ],
+            'ClearCommand id' => [
+                'serviceId' => 'simplytestable_pagecache.command.cache_validator.clear',
+                'expectedServiceClassName' => ClearCommand::class,
             ],
         ];
     }

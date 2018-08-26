@@ -24,3 +24,12 @@ services:
 
   SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory:
     alias: simplytestable_pagecache.cacheable_response_factory
+
+  simplytestable_pagecache.command.cache_validator.clear:
+    class: SimplyTestable\PageCacheBundle\Command\ClearCommand
+    tags: ['console.command']
+    arguments:
+      - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService'
+
+  SimplyTestable\PageCacheBundle\Command\ClearCommand:
+    alias: simplytestable_pagecache.command.cache_validator.clear
