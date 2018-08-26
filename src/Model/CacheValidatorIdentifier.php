@@ -16,10 +16,6 @@ class CacheValidatorIdentifier
      */
     public function setParameter($key, $value)
     {
-        if (is_bool($value)) {
-            $value = ($value) ? 'true' : 'false';
-        }
-
         $this->parameters[$key] = $value;
     }
 
@@ -38,6 +34,10 @@ class CacheValidatorIdentifier
     {
         $keyValuePairs = array();
         foreach ($this->parameters as $key => $value) {
+            if (is_bool($value)) {
+                $value = $value ? 'true' : 'false';
+            }
+
             $keyValuePairs[] = $key . ':' . $value;
         }
 

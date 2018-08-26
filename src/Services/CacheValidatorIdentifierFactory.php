@@ -38,10 +38,6 @@ class CacheValidatorIdentifierFactory
         }
 
         foreach ($parameters as $key => $value) {
-            if (is_bool($value)) {
-                $value = $value ? 'true' : 'false';
-            }
-
             $identifier->setParameter($key, $value);
         }
 

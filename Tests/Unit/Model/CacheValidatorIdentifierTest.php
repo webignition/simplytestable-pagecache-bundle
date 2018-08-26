@@ -27,26 +27,20 @@ class CacheValidatorIdentifierTest extends TestCase
     public function setParametersGetParametersDataProvider(): array
     {
         return [
-            'none' => [
+            'no parameters' => [
                 'parameters' => [],
                 'expectedParameters' => [],
             ],
-            'boolean parameter conversion' => [
+            'has parameters' => [
                 'parameters' => [
-                    'foo' => true,
-                    'bar' => false,
-                ],
-                'expectedParameters' => [
-                    'foo' => 'true',
-                    'bar' => 'false',
-                ],
-            ],
-            'scalar parameters' => [
-                'parameters' => [
+                    'true' => true,
+                    'false' => false,
                     'int' => 1,
                     'string' => 'foo',
                 ],
                 'expectedParameters' => [
+                    'true' => true,
+                    'false' => false,
                     'int' => 1,
                     'string' => 'foo',
                 ],
