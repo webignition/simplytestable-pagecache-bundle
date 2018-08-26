@@ -18,34 +18,35 @@ class CacheValidatorHeadersService
      */
     private $entityRepository;
 
-    /**
-     * @param EntityManagerInterface $entityManager
-     */
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
         $this->entityRepository = $this->entityManager->getRepository(CacheValidatorHeaders::class);
     }
 
-    /**
-     * @param string $identifier
-     *
-     * @return CacheValidatorHeaders
-     */
-    public function get($identifier)
+    public function find(string $identifier): ?CacheValidatorHeaders
     {
-        $cacheValidatorHeader = $this->fetch($identifier);
-        if (is_null($cacheValidatorHeader)) {
-            $cacheValidatorHeader = $this->create($identifier);
-        }
+        /* @var CacheValidatorHeaders $cacheValidatorHeaders */
+        $cacheValidatorHeaders = $this->entityRepository->findOneBy([
+            'identifier' => $identifier
+        ]);
 
-        return $cacheValidatorHeader;
+        return $cacheValidatorHeaders;
     }
 
-    /**
-     * @param int|null $limit
-     */
-    public function clear($limit = null)
+    public function create(string $identifier, \DateTime $lastModified): CacheValidatorHeaders
+    {
+        $cacheValidatorHeaders = new CacheValidatorHeaders();
+        $cacheValidatorHeaders->setIdentifier($identifier);
+        $cacheValidatorHeaders->setLastModifiedDate($lastModified);
+
+        $this->entityManager->persist($cacheValidatorHeaders);
+        $this->entityManager->flush();
+
+        return $cacheValidatorHeaders;
+    }
+
+    public function clear(?int $limit = null)
     {
         $all = $this->entityRepository->findAll($limit);
 
@@ -56,43 +57,8 @@ class CacheValidatorHeadersService
         $this->entityManager->flush();
     }
 
-    /**
-     * @return int
-     */
-    public function count()
+    public function count(): int
     {
         return $this->entityRepository->count([]);
-    }
-
-    /**
-     * @param string $identifier
-     *
-     * @return CacheValidatorHeaders
-     */
-    private function fetch($identifier)
-    {
-        /* @var CacheValidatorHeaders $cacheValidatorHeaders */
-        $cacheValidatorHeaders = $this->entityRepository->findOneBy([
-            'identifier' => $identifier
-        ]);
-
-        return $cacheValidatorHeaders;
-    }
-
-    /**
-     * @param string $identifier
-     *
-     * @return CacheValidatorHeaders
-     */
-    private function create($identifier)
-    {
-        $cacheValidatorHeaders = new CacheValidatorHeaders();
-        $cacheValidatorHeaders->setIdentifier($identifier);
-        $cacheValidatorHeaders->setLastModifiedDate(new \DateTime());
-
-        $this->entityManager->persist($cacheValidatorHeaders);
-        $this->entityManager->flush();
-
-        return $cacheValidatorHeaders;
     }
 }
