@@ -18,7 +18,7 @@ class FooCompilerPass implements CompilerPassInterface
         }
 
         foreach ($container->getAliases() as $id => $alias) {
-            if (strpos($id, 'simplytestable_pagecache') === false) {
+            if (strpos($id, 'SimplyTestable\\PageCacheBundle\\') === false) {
                 continue;
             }
 
