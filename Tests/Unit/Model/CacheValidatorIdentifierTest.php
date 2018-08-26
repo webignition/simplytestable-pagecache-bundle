@@ -3,7 +3,6 @@
 namespace SimplyTestable\PageCacheBundle\Tests\Functional\Model;
 
 use PHPUnit\Framework\TestCase;
-use SimplyTestable\PageCacheBundle\Entity\CacheValidatorHeaders;
 use SimplyTestable\PageCacheBundle\Model\CacheValidatorIdentifier;
 
 class CacheValidatorIdentifierTest extends TestCase
