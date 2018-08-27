@@ -1,6 +1,6 @@
 <?php
 
-namespace SimplyTestable\PageCacheBundle\Tests\Functional\Model;
+namespace SimplyTestable\PageCacheBundle\Tests\Unit\Model;
 
 use PHPUnit\Framework\TestCase;
 use SimplyTestable\PageCacheBundle\Model\CacheValidatorIdentifier;

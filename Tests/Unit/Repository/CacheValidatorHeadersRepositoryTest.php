@@ -1,6 +1,6 @@
 <?php
 
-namespace SimplyTestable\PageCacheBundle\Tests\Functional\Model;
+namespace SimplyTestable\PageCacheBundle\Tests\Unit\Model;
 
 use Doctrine\ORM\AbstractQuery;
 use Doctrine\ORM\EntityManagerInterface;

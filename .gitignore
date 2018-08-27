@@ -2,3 +2,4 @@
 /vendor
 /Tests/Functional/cache/
 /Tests/Functional/logs/
+/build/

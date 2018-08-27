@@ -1,59 +1,16 @@
 <?php
 
-namespace SimplyTestable\PageCacheBundle\Tests\Functional\Services;
+namespace SimplyTestable\PageCacheBundle\Tests\Unit\Services;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use SimplyTestable\PageCacheBundle\Entity\CacheValidatorHeaders;
-use SimplyTestable\PageCacheBundle\Model\CacheValidatorIdentifier;
 use SimplyTestable\PageCacheBundle\Repository\CacheValidatorHeadersRepository;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService;
-use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory;
-use Symfony\Component\HttpFoundation\Request;
-use webignition\SimplyTestableUserInterface\UserInterface;
-use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
 
 class CacheValidatorHeadersServiceTest extends TestCase
 {
-//    public function testGetDoesNotExist()
-//    {
-//        $identifier = 'foo';
-//
-//        /* @var MockInterface|CacheValidatorHeadersRepository $cacheValidatorHeadersRepository */
-//        $entityRepository = \Mockery::mock(CacheValidatorHeadersRepository::class);
-//
-//        $entityRepository
-//            ->shouldReceive('findOneBy')
-//            ->with([
-//                'identifier' => $identifier,
-//            ])
-//            ->andReturn(null);
-//
-//        /* @var MockInterface|EntityManagerInterface $entityManager */
-//        $entityManager = \Mockery::mock(EntityManagerInterface::class);
-//
-//        $entityManager
-//            ->shouldReceive('getRepository')
-//            ->with(CacheValidatorHeaders::class)
-//            ->andReturn($entityRepository);
-//
-//        $entityManager
-//            ->shouldReceive('persist')
-//            ->withArgs(function (CacheValidatorHeaders $cacheValidatorHeaders) use ($identifier) {
-//                $this->assertEquals($identifier, $cacheValidatorHeaders->getIdentifier());
-//
-//                var_dump($cacheValidatorHeaders);
-//            });
-//
-//        $entityManager
-//            ->shouldReceive('flush');
-//
-//        $cacheValidatorHeadersService = new CacheValidatorHeadersService($entityManager);
-//
-//        $cacheValidatorHeadersService->get($identifier);
-//    }
-
     /**
      * @dataProvider findDataProvider
      *

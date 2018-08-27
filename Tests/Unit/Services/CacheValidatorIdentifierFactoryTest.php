@@ -1,6 +1,6 @@
 <?php
 
-namespace SimplyTestable\PageCacheBundle\Tests\Functional\Services;
+namespace SimplyTestable\PageCacheBundle\Tests\Unit\Services;
 
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
