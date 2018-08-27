@@ -9,14 +9,9 @@ class CacheValidatorIdentifier
      */
     private $parameters = [];
 
-    /**
-     * @param string $key
-     *
-     * @param mixed $value
-     */
-    public function setParameter($key, $value)
+    public function __construct(array $parameters = [])
     {
-        $this->parameters[$key] = $value;
+        $this->parameters = $parameters;
     }
 
     /**

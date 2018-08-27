@@ -15,11 +15,7 @@ class CacheValidatorIdentifierTest extends TestCase
      */
     public function testSetParametersGetParameters(array $parameters, array $expectedParameters)
     {
-        $cacheValidatorIdentifier = new CacheValidatorIdentifier();
-
-        foreach ($parameters as $key => $value) {
-            $cacheValidatorIdentifier->setParameter($key, $value);
-        }
+        $cacheValidatorIdentifier = new CacheValidatorIdentifier($parameters);
 
         $this->assertEquals($expectedParameters, $cacheValidatorIdentifier->getParameters());
     }
@@ -56,11 +52,7 @@ class CacheValidatorIdentifierTest extends TestCase
      */
     public function testCastToString(array $parameters, string $expectedStringRepresentation)
     {
-        $cacheValidatorIdentifier = new CacheValidatorIdentifier();
-
-        foreach ($parameters as $key => $value) {
-            $cacheValidatorIdentifier->setParameter($key, $value);
-        }
+        $cacheValidatorIdentifier = new CacheValidatorIdentifier($parameters);
 
         $this->assertEquals($expectedStringRepresentation, $cacheValidatorIdentifier->__toString());
     }

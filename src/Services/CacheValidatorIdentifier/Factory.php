@@ -26,15 +26,9 @@ class Factory
     {
         $user = $this->userManager->getUser();
 
-        $identifier = new CacheValidatorIdentifier();
+        $parameters['user'] = $user->getUsername();
+        $parameters['is_logged_in'] = $this->userManager->isLoggedIn();
 
-        foreach ($parameters as $key => $value) {
-            $identifier->setParameter($key, $value);
-        }
-
-        $identifier->setParameter('user', $user->getUsername());
-        $identifier->setParameter('is_logged_in', $this->userManager->isLoggedIn());
-
-        return $identifier;
+        return new CacheValidatorIdentifier($parameters);
     }
 }
