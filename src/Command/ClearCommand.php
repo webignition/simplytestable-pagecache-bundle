@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ClearCommand extends Command
 {
-    const NAME = 'simplytestable:cachevalidator:clear';
+    const NAME = 'simplytestable:pagecache:cachvalidator:clear';
     const DEFAULT_LIMIT = 100;
 
     /**
@@ -56,7 +56,7 @@ class ClearCommand extends Command
 
         $output->writeln([
             '<info>Clearing cache validator headers</info>',
-            sprintf('<comment>%s</comment> items to delete', $this->cacheValidatorHeadersService->count()),
+            sprintf('<comment>%s</comment> items to delete', $count),
             sprintf('<comment>%s</comment> items per batch', $limit),
             ''
         ]);
