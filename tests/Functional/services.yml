@@ -1,0 +1,7 @@
+services:
+  Doctrine\ORM\EntityManagerInterface:
+    class: SimplyTestable\PageCacheBundle\Tests\Functional\EntityManagerProxy
+
+  SimplyTestable\PageCacheBundle\Tests\Functional\EntityManagerProxy:
+    alias: Doctrine\ORM\EntityManagerInterface
+    public: true

@@ -1,0 +1,32 @@
+services:
+  simplytestable_pagecache.cache_validator_headers_service:
+    class: SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService
+    arguments:
+      - '@Doctrine\ORM\EntityManagerInterface'
+
+  SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService:
+    alias: simplytestable_pagecache.cache_validator_headers_service
+
+  simplytestable_pagecache.cache_validator_identifier.parameters_factory:
+    class: SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory
+
+  SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory:
+    alias: simplytestable_pagecache.cache_validator_identifier.parameters_factory
+
+  simplytestable_pagecache.cacheable_response_factory:
+    class: SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory
+    arguments:
+      - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService'
+      - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory'
+
+  SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory:
+    alias: simplytestable_pagecache.cacheable_response_factory
+
+  simplytestable_pagecache.command.cache_validator.clear:
+    class: SimplyTestable\PageCacheBundle\Command\ClearCommand
+    tags: ['console.command']
+    arguments:
+      - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService'
+
+  SimplyTestable\PageCacheBundle\Command\ClearCommand:
+    alias: simplytestable_pagecache.command.cache_validator.clear

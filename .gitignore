@@ -1,0 +1,5 @@
+/.idea
+/vendor
+/tests/Functional/cache/
+/tests/Functional/logs/
+/build/
