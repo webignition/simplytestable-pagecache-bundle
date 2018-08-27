@@ -45,7 +45,12 @@ class CacheableResponseFactory
 
     public function createResponse(Request $request, array $parameters): Response
     {
-        $cacheValidatorIdentifier = $this->cacheValidatorIdentifierFactory->create($request, $parameters);
+        $parametersFromRequest = $this->cacheValidatorIdentifierParametersFactory->createFromRequest($request);
+
+        $cacheValidatorIdentifier = $this->cacheValidatorIdentifierFactory->create(
+            $request,
+            array_merge($parametersFromRequest, $parameters)
+        );
         $cacheValidatorHeaders = $this->cacheValidatorHeadersService->find($cacheValidatorIdentifier);
 
         if (empty($cacheValidatorHeaders)) {

@@ -55,7 +55,9 @@ class CacheableResponseFactoryTest extends TestCase
     public function createResponseDataProvider(): array
     {
         $request = new Request([], [], ['_route' => 'route_name',]);
-        $parameters = [];
+        $parameters = [
+            'route' => 'route_name',
+        ];
         $cacheValidatorHeaders = new CacheValidatorHeaders();
         $cacheValidatorHeaders
             ->setLastModifiedDate(new \DateTime());
