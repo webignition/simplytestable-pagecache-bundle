@@ -78,12 +78,4 @@ class CacheValidatorHeaders
     {
         return $this->lastModifiedDate;
     }
-
-    /**
-     * @return string
-     */
-    public function getETag()
-    {
-        return md5($this->identifier);
-    }
 }

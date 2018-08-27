@@ -33,10 +33,13 @@ class CacheableResponseFactoryTest extends AbstractFunctionalTestCase
             '_route' => 'route_name',
         ]);
 
+        $request->headers->set('if-none-match', 'W/"ce2628dfb460f03c1a28e087f03828e5"');
+
         $parameters = [];
 
         $cacheableResponse = $cacheableResponseFactory->createResponse($request, $parameters);
 
         $this->assertInstanceOf(Response::class, $cacheableResponse);
+        $this->assertEquals(Response::HTTP_NOT_MODIFIED, $cacheableResponse->getStatusCode());
     }
 }

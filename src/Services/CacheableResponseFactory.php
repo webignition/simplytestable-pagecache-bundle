@@ -44,15 +44,22 @@ class CacheableResponseFactory
             );
         }
 
+//        var_dump($cacheValidatorHeaders->getIdentifier());
+//        exit();
+
         $response = new Response();
         $response->setPublic();
-        $response->setEtag($cacheValidatorHeaders->getETag(), true);
+        $response->setEtag($cacheValidatorHeaders->getIdentifier(), true);
         $response->setLastModified(new \DateTime($cacheValidatorHeaders->getLastModifiedDate()->format('c')));
         $response->headers->addCacheControlDirective('must-revalidate', true);
 
-        $currentIfNoneMatch = $request->headers->get('if-none-match');
+        $clonedRequest = clone $request;
+
+        $currentIfNoneMatch = $clonedRequest->headers->get('if-none-match');
         $modifiedEtag = preg_replace('/-gzip"$/', '"', $currentIfNoneMatch);
-        $request->headers->set('if-none-match', $modifiedEtag);
+        $clonedRequest->headers->set('if-none-match', $modifiedEtag);
+
+        $response->isNotModified($clonedRequest);
 
         return $response;
     }

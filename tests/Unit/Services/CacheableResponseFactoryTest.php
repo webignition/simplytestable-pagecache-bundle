@@ -22,12 +22,14 @@ class CacheableResponseFactoryTest extends TestCase
      * @param array $parameters
      * @param CacheValidatorHeadersService $cacheValidatorHeadersService
      * @param string $expectedResponseEtag
+     * @param int $expectedResponseStatusCode
      */
     public function testCreateResponse(
         Request $request,
         array $parameters,
         CacheValidatorHeadersService $cacheValidatorHeadersService,
-        string $expectedResponseEtag
+        string $expectedResponseEtag,
+        int $expectedResponseStatusCode
     ) {
         $cacheableResponseFactory = new CacheableResponseFactory(
             $cacheValidatorHeadersService,
@@ -41,18 +43,26 @@ class CacheableResponseFactoryTest extends TestCase
         $this->assertTrue($response->headers->getCacheControlDirective('public'));
         $this->assertTrue($response->headers->getCacheControlDirective('must-revalidate'));
         $this->assertEquals($expectedResponseEtag, $response->headers->get('etag'));
+        $this->assertEquals($expectedResponseStatusCode, $response->getStatusCode());
     }
 
     public function createResponseDataProvider(): array
     {
+        $etag = 'W/"ce2628dfb460f03c1a28e087f03828e5"';
+
         $request = new Request([], [], ['_route' => 'route_name',]);
         $parameters = [
             'route' => 'route_name',
         ];
-        $cacheValidatorHeaders = new CacheValidatorHeaders();
-        $cacheValidatorHeaders
-            ->setLastModifiedDate(new \DateTime());
+
+        $requestWithIfNoneMatchHeader = clone $request;
+        $requestWithIfNoneMatchHeader->headers->set('if-none-match', $etag);
+
         $cacheValidatorIdentifier = new CacheValidatorIdentifier($parameters);
+
+        $cacheValidatorHeaders = new CacheValidatorHeaders();
+        $cacheValidatorHeaders->setLastModifiedDate(new \DateTime());
+        $cacheValidatorHeaders->setIdentifier($cacheValidatorIdentifier);
 
         return [
             'no existing CacheValidatorHeaders' => [
@@ -63,16 +73,28 @@ class CacheableResponseFactoryTest extends TestCase
                     null,
                     $cacheValidatorHeaders
                 ),
-                'expectedResponseEtag' => 'W/"d41d8cd98f00b204e9800998ecf8427e"',
+                'expectedResponseEtag' => $etag,
+                'expectedResponseStatusCode' => Response::HTTP_OK,
             ],
-            'has existing CacheValidatorHeaders' => [
+            'has existing CacheValidatorHeaders, no if-none-match header' => [
                 'request' => $request,
                 'parameters' => $parameters,
                 'cacheValidatorHeadersService' => $this->createCacheValidatorHeadersService(
                     $cacheValidatorIdentifier,
                     $cacheValidatorHeaders
                 ),
-                'expectedResponseEtag' => 'W/"d41d8cd98f00b204e9800998ecf8427e"',
+                'expectedResponseEtag' => $etag,
+                'expectedResponseStatusCode' => Response::HTTP_OK,
+            ],
+            'has existing CacheValidatorHeaders, has if-none-match header' => [
+                'request' => $requestWithIfNoneMatchHeader,
+                'parameters' => $parameters,
+                'cacheValidatorHeadersService' => $this->createCacheValidatorHeadersService(
+                    $cacheValidatorIdentifier,
+                    $cacheValidatorHeaders
+                ),
+                'expectedResponseEtag' => $etag,
+                'expectedResponseStatusCode' => Response::HTTP_NOT_MODIFIED,
             ],
         ];
     }
