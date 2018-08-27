@@ -25,11 +25,6 @@ class EntityManagerProxy implements EntityManagerInterface
         $this->cacheValidatorHeadersRepository = \Mockery::mock(CacheValidatorHeadersRepository::class);
     }
 
-    public function getMock()
-    {
-        return $this->entityManagerMock;
-    }
-
     public function getClassMetadata($className)
     {
     }

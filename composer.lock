@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "3c7bf9edbe930e2ad15339286af2438e",
+    "content-hash": "c56d7d1d6ef3e10de2f0f6cc38ffa427",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3821,42 +3821,6 @@
             ],
             "description": "A small library for converting tokenized PHP source code into XML and potentially other formats",
             "time": "2017-04-07T12:08:54+00:00"
-        },
-        {
-            "name": "webignition/simplytestable-user-interface",
-            "version": "0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/webignition/simplytestable-user-interface.git",
-                "reference": "5caab6ca08fe4b0d2a88bab6aba63ede098818f6"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/webignition/simplytestable-user-interface/zipball/5caab6ca08fe4b0d2a88bab6aba63ede098818f6",
-                "reference": "5caab6ca08fe4b0d2a88bab6aba63ede098818f6",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "webignition\\SimplyTestableUserInterface\\": "src/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jon Cram",
-                    "email": "jon@webignition.net"
-                }
-            ],
-            "homepage": "https://github.com/webignition/simplytestable-user-interface",
-            "time": "2018-08-24T17:17:44+00:00"
         },
         {
             "name": "webmozart/assert",

@@ -10,32 +10,13 @@ use SimplyTestable\PageCacheBundle\Tests\Functional\AbstractFunctionalTestCase;
 use SimplyTestable\PageCacheBundle\Tests\Functional\EntityManagerProxy;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use webignition\SimplyTestableUserInterface\UserInterface;
 
 class CacheableResponseFactoryTest extends AbstractFunctionalTestCase
 {
-    const USER_USERNAME = 'user@example.com';
-
-    /**
-     * @var UserInterface
-     */
-    private $user;
-
-    protected function setUp()
-    {
-        parent::setUp();
-
-        $this->user = \Mockery::mock(UserInterface::class);
-        $this->user
-            ->shouldReceive('getUserName')
-            ->andReturn(self::USER_USERNAME);
-    }
-
     public function testCreateResponse()
     {
         /* @var EntityManagerProxy $entityManagerProxy */
         $entityManagerProxy = $this->container->get(EntityManagerProxy::class);
-        $entityManagerMock = $entityManagerProxy->getMock();
 
         /* @var EntityManagerInterface|MockInterface $entityRepositoryMock */
         $entityRepositoryMock = $entityManagerProxy->getRepository(CacheValidatorHeaders::class);
