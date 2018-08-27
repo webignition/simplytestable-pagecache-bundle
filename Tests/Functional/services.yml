@@ -1,6 +1,14 @@
 services:
   webignition\SimplyTestableUserManagerInterface\UserManagerInterface:
-    class: SimplyTestable\PageCacheBundle\Tests\Functional\FooUserManager
+    class: SimplyTestable\PageCacheBundle\Tests\Functional\UserManagerProxy
+
+  SimplyTestable\PageCacheBundle\Tests\Functional\UserManagerProxy:
+    alias: webignition\SimplyTestableUserManagerInterface\UserManagerInterface
+    public: true
 
   Doctrine\ORM\EntityManagerInterface:
-    class: SimplyTestable\PageCacheBundle\Tests\Functional\FooEntityManager
+    class: SimplyTestable\PageCacheBundle\Tests\Functional\EntityManagerProxy
+
+  SimplyTestable\PageCacheBundle\Tests\Functional\EntityManagerProxy:
+    alias: Doctrine\ORM\EntityManagerInterface
+    public: true

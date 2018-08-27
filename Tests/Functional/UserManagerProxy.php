@@ -2,19 +2,37 @@
 
 namespace SimplyTestable\PageCacheBundle\Tests\Functional;
 
+use Mockery\MockInterface;
 use webignition\SimplyTestableUserInterface\UserInterface;
 use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
 
-class FooUserManager implements UserManagerInterface
+class UserManagerProxy implements UserManagerInterface
 {
+    /**
+     * @var MockInterface|UserManagerInterface
+     */
+    private $userManagerMock;
+
+    public function __construct()
+    {
+        $this->userManagerMock = \Mockery::mock(UserManagerInterface::class);
+    }
+
+    /**
+     * @return MockInterface|UserManagerInterface
+     */
+    public function getMock()
+    {
+        return $this->userManagerMock;
+    }
 
     public function getUser(): UserInterface
     {
-        // TODO: Implement getUser() method.
+        return $this->userManagerMock->getUser();
     }
 
     public function isLoggedIn(): bool
     {
-        // TODO: Implement isLoggedIn() method.
+        return $this->userManagerMock->isLoggedIn();
     }
 }
