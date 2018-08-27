@@ -23,17 +23,17 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "SimplyTestable\\PageCacheBundle\\Tests\\": "Tests/"
+            "SimplyTestable\\PageCacheBundle\\Tests\\": "tests/"
         }
     },
     "scripts": {
-        "test-unit": "./vendor/bin/phpunit --colors tests/Src/Unit/",
-        "test-functional": "./vendor/bin/phpunit --colors tests/Src/Functional/",
+        "test-unit": "./vendor/bin/phpunit --colors tests/Unit/",
+        "test-functional": "./vendor/bin/phpunit --colors tests/Functional/",
         "test": [
             "@composer test-unit",
             "@composer test-functional"
         ],
-        "cs": "./vendor/bin/phpcs --colors --standard=PSR2 --extensions=php src tests/",
+        "cs": "./vendor/bin/phpcs --colors --standard=PSR2 --extensions=php --ignore=tests/Functional/cache src tests/",
         "ci": [
             "@composer cs",
             "@composer test"

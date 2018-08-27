@@ -15,7 +15,7 @@ class SimplyTestablePageCacheExtensionTest extends TestCase
         $containerBuilder = \Mockery::mock(ContainerBuilder::class);
         $containerBuilder
             ->shouldReceive('fileExists')
-            ->with(str_replace('Tests/Unit', 'src', __DIR__ . '/../Resources/config/services.yml'))
+            ->with(str_replace('tests/Unit', 'src', __DIR__ . '/../Resources/config/services.yml'))
             ->andReturn(true);
 
         $containerBuilder
