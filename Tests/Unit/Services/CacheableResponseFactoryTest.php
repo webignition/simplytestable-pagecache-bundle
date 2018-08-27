@@ -68,7 +68,6 @@ class CacheableResponseFactoryTest extends TestCase
                 'request' => $request,
                 'parameters' => $parameters,
                 'cacheValidatorIdentifierFactory' => $this->createCacheValidatorHeaderFactory(
-                    $request,
                     $parameters,
                     $cacheValidatorIdentifier
                 ),
@@ -83,7 +82,6 @@ class CacheableResponseFactoryTest extends TestCase
                 'request' => $request,
                 'parameters' => $parameters,
                 'cacheValidatorIdentifierFactory' => $this->createCacheValidatorHeaderFactory(
-                    $request,
                     $parameters,
                     $cacheValidatorIdentifier
                 ),
@@ -96,17 +94,14 @@ class CacheableResponseFactoryTest extends TestCase
         ];
     }
 
-    private function createCacheValidatorHeaderFactory(
-        Request $request,
-        array $parameters,
-        CacheValidatorIdentifier $createResponse
-    ) {
+    private function createCacheValidatorHeaderFactory(array $parameters, CacheValidatorIdentifier $createResponse)
+    {
         /* @var MockInterface|CacheValidatorIdentifierFactory $cacheValidatorIdentifierFactory */
         $cacheValidatorIdentifierFactory = \Mockery::mock(CacheValidatorIdentifierFactory::class);
 
         $cacheValidatorIdentifierFactory
             ->shouldReceive('create')
-            ->with($request, $parameters)
+            ->with($parameters)
             ->andReturn($createResponse);
 
         return $cacheValidatorIdentifierFactory;
