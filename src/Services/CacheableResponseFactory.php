@@ -44,9 +44,6 @@ class CacheableResponseFactory
             );
         }
 
-//        var_dump($cacheValidatorHeaders->getIdentifier());
-//        exit();
-
         $response = new Response();
         $response->setPublic();
         $response->setEtag($cacheValidatorHeaders->getIdentifier(), true);
