@@ -2,18 +2,15 @@
 
 namespace SimplyTestable\PageCacheBundle\Tests\Unit\Services;
 
-use Doctrine\ORM\EntityManagerInterface;
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use SimplyTestable\PageCacheBundle\Entity\CacheValidatorHeaders;
 use SimplyTestable\PageCacheBundle\Model\CacheValidatorIdentifier;
-use SimplyTestable\PageCacheBundle\Repository\CacheValidatorHeadersRepository;
 use SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService;
-use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory;
+use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory as CacheValidatorIdentifierFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use webignition\SimplyTestableUserInterface\UserInterface;
 use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
 
 class CacheableResponseFactoryTest extends TestCase
@@ -25,6 +22,7 @@ class CacheableResponseFactoryTest extends TestCase
      * @param array $parameters
      * @param CacheValidatorIdentifierFactory $cacheValidatorIdentifierFactory
      * @param CacheValidatorHeadersService $cacheValidatorHeadersService
+     * @param string $expectedResponseEtag
      */
     public function testCreateResponse(
         Request $request,
@@ -130,6 +128,7 @@ class CacheableResponseFactoryTest extends TestCase
                     \DateTime $datetime
                 ) use ($cacheValidatorIdentifier) {
                     $this->assertEquals($cacheValidatorIdentifier, $passedCacheValidatorIdentifier);
+                    $this->assertInstanceOf(\DateTime::class, $datetime);
 
                     return true;
                 })

@@ -7,19 +7,27 @@ services:
   SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService:
     alias: simplytestable_pagecache.cache_validator_headers_service
 
-  simplytestable_pagecache.cache_validator_identifier_factory:
-    class: SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory
+  simplytestable_pagecache.cache_validator_identifier.factory:
+    class: SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory
     arguments:
       - '@webignition\SimplyTestableUserManagerInterface\UserManagerInterface'
 
-  SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory:
-    alias: simplytestable_pagecache.cache_validator_identifier_factory
+  SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory:
+    alias: simplytestable_pagecache.cache_validator_identifier.factory
+
+  simplytestable_pagecache.cache_validator_identifier.parameters_factory:
+    class: SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory
+    arguments:
+    - '@webignition\SimplyTestableUserManagerInterface\UserManagerInterface'
+
+  SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory:
+    alias: simplytestable_pagecache.cache_validator_identifier.parameters_factory
 
   simplytestable_pagecache.cacheable_response_factory:
     class: SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory
     arguments:
       - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService'
-      - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory'
+      - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory'
       - '@webignition\SimplyTestableUserManagerInterface\UserManagerInterface'
 
   SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory:

@@ -1,12 +1,12 @@
 <?php
 
-namespace SimplyTestable\PageCacheBundle\Services;
+namespace SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier;
 
 use SimplyTestable\PageCacheBundle\Model\CacheValidatorIdentifier;
 use Symfony\Component\HttpFoundation\Request;
 use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
 
-class CacheValidatorIdentifierFactory
+class Factory
 {
     /**
      * @var UserManagerInterface

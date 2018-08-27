@@ -1,16 +1,16 @@
 <?php
 
-namespace SimplyTestable\PageCacheBundle\Tests\Unit\Services;
+namespace SimplyTestable\PageCacheBundle\Tests\Unit\Services\CacheValidatorIdentifier;
 
 use Mockery\MockInterface;
 use PHPUnit\Framework\TestCase;
 use SimplyTestable\PageCacheBundle\Model\CacheValidatorIdentifier;
-use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory;
+use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory as CacheValidatorIdentifierFactory;
 use Symfony\Component\HttpFoundation\Request;
 use webignition\SimplyTestableUserInterface\UserInterface;
 use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
 
-class CacheValidatorIdentifierFactoryTest extends TestCase
+class FactoryTest extends TestCase
 {
     const USER_USERNAME = 'user@example.com';
 

@@ -5,7 +5,9 @@ namespace SimplyTestable\PageCacheBundle\Tests\Functional;
 use SimplyTestable\PageCacheBundle\Command\ClearCommand;
 use SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService;
-use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory;
+use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory as CacheValidatorIdentifierFactory;
+use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory as
+    CacheValidatorIdentifierParametersFactory;
 
 class ContainerTest extends AbstractFunctionalTestCase
 {
@@ -40,13 +42,21 @@ class ContainerTest extends AbstractFunctionalTestCase
                 'serviceId' => CacheValidatorHeadersService::class,
                 'expectedServiceClassName' => CacheValidatorHeadersService::class,
             ],
-            'CacheValidatorIdentifierFactory id' => [
-                'serviceId' => 'simplytestable_pagecache.cache_validator_identifier_factory',
+            'CacheValidatorIdentifier\Factory id' => [
+                'serviceId' => 'simplytestable_pagecache.cache_validator_identifier.factory',
                 'expectedServiceClassName' => CacheValidatorIdentifierFactory::class,
             ],
-            'CacheValidatorIdentifierFactory alias' => [
+            'CacheValidatorIdentifier\Factory alias' => [
                 'serviceId' => CacheValidatorIdentifierFactory::class,
                 'expectedServiceClassName' => CacheValidatorIdentifierFactory::class,
+            ],
+            'CacheValidatorIdentifier\ParametersFactory id' => [
+                'serviceId' => 'simplytestable_pagecache.cache_validator_identifier.parameters_factory',
+                'expectedServiceClassName' => CacheValidatorIdentifierParametersFactory::class,
+            ],
+            'CacheValidatorIdentifier\ParametersFactory alias' => [
+                'serviceId' => CacheValidatorIdentifierParametersFactory::class,
+                'expectedServiceClassName' => CacheValidatorIdentifierParametersFactory::class,
             ],
             'ClearCommand id' => [
                 'serviceId' => 'simplytestable_pagecache.command.cache_validator.clear',

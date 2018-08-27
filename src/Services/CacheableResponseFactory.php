@@ -2,6 +2,7 @@
 
 namespace SimplyTestable\PageCacheBundle\Services;
 
+use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory as CacheValidatorIdentifierFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
