@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ClearCommand extends Command
 {
-    const NAME = 'simplytestable:pagecache:cachvalidator:clear';
+    const NAME = 'simplytestable:pagecache:cachevalidator:clear';
     const DEFAULT_LIMIT = 100;
 
     /**
