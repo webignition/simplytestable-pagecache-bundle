@@ -19,6 +19,7 @@ class CacheValidatorHeadersTest extends TestCase
         $cacheValidatorHeaders->setIdentifier($identifier);
 
         $this->assertEquals($expectedEtag, $cacheValidatorHeaders->getETag());
+        $this->assertNull($cacheValidatorHeaders->getId());
     }
 
     public function getEtagDataProvider(): array
