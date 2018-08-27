@@ -149,3 +149,14 @@ You can specify whatever batch size you need:
     ./bin/console simplytestable:pagecache:cachevalidator:clear 345
     ./bin/console simplytestable:pagecache:cachevalidator:clear 1000
 
+## Contrinbuting
+
+Need a change? Spotted a bug? Feel free to fork and create a PR against this repo. I'm happy to consider any changes.
+
+A PR will kick off a Travis CI build that runs code quality checks and runs the test suite.
+
+If you make any changes, please make sure that:
+
+- your code meets PSR2 coding standards
+- existing tests pass
+- changes to functionality are covered by updated or added tests
