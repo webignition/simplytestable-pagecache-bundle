@@ -9,8 +9,7 @@
         "symfony/dependency-injection": "^4.1",
         "symfony/framework-bundle": "^4.1",
         "symfony/http-kernel": "^4.1",
-        "symfony/yaml": "^4.1",
-        "webignition/simplytestable-usermanager-interface": "^0.1"
+        "symfony/yaml": "^4.1"
     },
     "require-dev": {
         "mockery/mockery": "^1.0",

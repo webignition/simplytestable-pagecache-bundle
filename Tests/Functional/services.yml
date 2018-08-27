@@ -1,11 +1,4 @@
 services:
-  webignition\SimplyTestableUserManagerInterface\UserManagerInterface:
-    class: SimplyTestable\PageCacheBundle\Tests\Functional\UserManagerProxy
-
-  SimplyTestable\PageCacheBundle\Tests\Functional\UserManagerProxy:
-    alias: webignition\SimplyTestableUserManagerInterface\UserManagerInterface
-    public: true
-
   Doctrine\ORM\EntityManagerInterface:
     class: SimplyTestable\PageCacheBundle\Tests\Functional\EntityManagerProxy
 

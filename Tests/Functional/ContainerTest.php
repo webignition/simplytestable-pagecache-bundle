@@ -5,7 +5,6 @@ namespace SimplyTestable\PageCacheBundle\Tests\Functional;
 use SimplyTestable\PageCacheBundle\Command\ClearCommand;
 use SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService;
-use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory as CacheValidatorIdentifierFactory;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory as
     CacheValidatorIdentifierParametersFactory;
 
@@ -41,14 +40,6 @@ class ContainerTest extends AbstractFunctionalTestCase
             'CacheValidatorHeadersService alias' => [
                 'serviceId' => CacheValidatorHeadersService::class,
                 'expectedServiceClassName' => CacheValidatorHeadersService::class,
-            ],
-            'CacheValidatorIdentifier\Factory id' => [
-                'serviceId' => 'simplytestable_pagecache.cache_validator_identifier.factory',
-                'expectedServiceClassName' => CacheValidatorIdentifierFactory::class,
-            ],
-            'CacheValidatorIdentifier\Factory alias' => [
-                'serviceId' => CacheValidatorIdentifierFactory::class,
-                'expectedServiceClassName' => CacheValidatorIdentifierFactory::class,
             ],
             'CacheValidatorIdentifier\ParametersFactory id' => [
                 'serviceId' => 'simplytestable_pagecache.cache_validator_identifier.parameters_factory',

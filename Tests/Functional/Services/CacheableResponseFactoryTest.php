@@ -4,20 +4,13 @@ namespace SimplyTestable\PageCacheBundle\Tests\Functional\Services;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Mockery\MockInterface;
-use PHPUnit\Framework\TestCase;
 use SimplyTestable\PageCacheBundle\Entity\CacheValidatorHeaders;
-use SimplyTestable\PageCacheBundle\Model\CacheValidatorIdentifier;
-use SimplyTestable\PageCacheBundle\Repository\CacheValidatorHeadersRepository;
 use SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory;
-use SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService;
-use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifierFactory;
 use SimplyTestable\PageCacheBundle\Tests\Functional\AbstractFunctionalTestCase;
 use SimplyTestable\PageCacheBundle\Tests\Functional\EntityManagerProxy;
-use SimplyTestable\PageCacheBundle\Tests\Functional\UserManagerProxy;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use webignition\SimplyTestableUserInterface\UserInterface;
-use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
 
 class CacheableResponseFactoryTest extends AbstractFunctionalTestCase
 {
@@ -49,20 +42,8 @@ class CacheableResponseFactoryTest extends AbstractFunctionalTestCase
 
         $entityRepositoryMock
             ->shouldReceive('findOneBy')
-            ->with(['identifier' => 'cf4adad68ede925ef3d3a9e6c95af8da'])
+            ->with(['identifier' => 'ce2628dfb460f03c1a28e087f03828e5'])
             ->andReturn(null);
-
-        /* @var UserManagerProxy $userManagerProxy */
-        $userManagerProxy = $this->container->get(UserManagerProxy::class);
-        $userManagerMock = $userManagerProxy->getMock();
-
-        $userManagerMock
-            ->shouldReceive('getUser')
-            ->andReturn($this->user);
-
-        $userManagerMock
-            ->shouldReceive('isLoggedIn')
-            ->andReturn(true);
 
         /* @var CacheableResponseFactory $cacheableResponseFactory */
         $cacheableResponseFactory = $this->container->get(CacheableResponseFactory::class);

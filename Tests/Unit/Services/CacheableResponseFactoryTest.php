@@ -8,12 +8,10 @@ use SimplyTestable\PageCacheBundle\Entity\CacheValidatorHeaders;
 use SimplyTestable\PageCacheBundle\Model\CacheValidatorIdentifier;
 use SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService;
-use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory as CacheValidatorIdentifierFactory;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory
     as CacheValidatorIdentifierParametersFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
 
 class CacheableResponseFactoryTest extends TestCase
 {
@@ -22,25 +20,18 @@ class CacheableResponseFactoryTest extends TestCase
      *
      * @param Request $request
      * @param array $parameters
-     * @param CacheValidatorIdentifierFactory $cacheValidatorIdentifierFactory
      * @param CacheValidatorHeadersService $cacheValidatorHeadersService
      * @param string $expectedResponseEtag
      */
     public function testCreateResponse(
         Request $request,
         array $parameters,
-        CacheValidatorIdentifierFactory $cacheValidatorIdentifierFactory,
         CacheValidatorHeadersService $cacheValidatorHeadersService,
         string $expectedResponseEtag
     ) {
-        /* @var MockInterface|UserManagerInterface $userManager */
-        $userManager = \Mockery::mock(UserManagerInterface::class);
-
         $cacheableResponseFactory = new CacheableResponseFactory(
             $cacheValidatorHeadersService,
-            $cacheValidatorIdentifierFactory,
-            new CacheValidatorIdentifierParametersFactory(),
-            $userManager
+            new CacheValidatorIdentifierParametersFactory()
         );
 
         $response = $cacheableResponseFactory->createResponse($request, $parameters);
@@ -61,16 +52,12 @@ class CacheableResponseFactoryTest extends TestCase
         $cacheValidatorHeaders = new CacheValidatorHeaders();
         $cacheValidatorHeaders
             ->setLastModifiedDate(new \DateTime());
-        $cacheValidatorIdentifier = new CacheValidatorIdentifier();
+        $cacheValidatorIdentifier = new CacheValidatorIdentifier($parameters);
 
         return [
             'no existing CacheValidatorHeaders' => [
                 'request' => $request,
                 'parameters' => $parameters,
-                'cacheValidatorIdentifierFactory' => $this->createCacheValidatorHeaderFactory(
-                    $parameters,
-                    $cacheValidatorIdentifier
-                ),
                 'cacheValidatorHeadersService' => $this->createCacheValidatorHeadersService(
                     $cacheValidatorIdentifier,
                     null,
@@ -81,10 +68,6 @@ class CacheableResponseFactoryTest extends TestCase
             'has existing CacheValidatorHeaders' => [
                 'request' => $request,
                 'parameters' => $parameters,
-                'cacheValidatorIdentifierFactory' => $this->createCacheValidatorHeaderFactory(
-                    $parameters,
-                    $cacheValidatorIdentifier
-                ),
                 'cacheValidatorHeadersService' => $this->createCacheValidatorHeadersService(
                     $cacheValidatorIdentifier,
                     $cacheValidatorHeaders
@@ -92,19 +75,6 @@ class CacheableResponseFactoryTest extends TestCase
                 'expectedResponseEtag' => 'W/"d41d8cd98f00b204e9800998ecf8427e"',
             ],
         ];
-    }
-
-    private function createCacheValidatorHeaderFactory(array $parameters, CacheValidatorIdentifier $createResponse)
-    {
-        /* @var MockInterface|CacheValidatorIdentifierFactory $cacheValidatorIdentifierFactory */
-        $cacheValidatorIdentifierFactory = \Mockery::mock(CacheValidatorIdentifierFactory::class);
-
-        $cacheValidatorIdentifierFactory
-            ->shouldReceive('create')
-            ->with($parameters)
-            ->andReturn($createResponse);
-
-        return $cacheValidatorIdentifierFactory;
     }
 
     private function createCacheValidatorHeadersService(
