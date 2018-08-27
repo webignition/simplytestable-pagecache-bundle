@@ -28,6 +28,7 @@ services:
     arguments:
       - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService'
       - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory'
+      - '@SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory'
       - '@webignition\SimplyTestableUserManagerInterface\UserManagerInterface'
 
   SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory:

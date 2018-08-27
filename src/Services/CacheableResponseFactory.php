@@ -3,6 +3,8 @@
 namespace SimplyTestable\PageCacheBundle\Services;
 
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory as CacheValidatorIdentifierFactory;
+use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory
+    as CacheValidatorIdentifierParametersFactory;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
@@ -20,6 +22,11 @@ class CacheableResponseFactory
     private $cacheValidatorIdentifierFactory;
 
     /**
+     * @var CacheValidatorIdentifierParametersFactory
+     */
+    private $cacheValidatorIdentifierParametersFactory;
+
+    /**
      * @var UserManagerInterface
      */
     private $userManager;
@@ -27,10 +34,12 @@ class CacheableResponseFactory
     public function __construct(
         CacheValidatorHeadersService $cacheValidatorHeadersService,
         CacheValidatorIdentifierFactory $cacheValidatorIdentifierFactory,
+        CacheValidatorIdentifierParametersFactory $cacheValidatorIdentifierParametersFactory,
         UserManagerInterface $userManager
     ) {
         $this->cacheValidatorHeadersService = $cacheValidatorHeadersService;
         $this->cacheValidatorIdentifierFactory = $cacheValidatorIdentifierFactory;
+        $this->cacheValidatorIdentifierParametersFactory = $cacheValidatorIdentifierParametersFactory;
         $this->userManager = $userManager;
     }
 

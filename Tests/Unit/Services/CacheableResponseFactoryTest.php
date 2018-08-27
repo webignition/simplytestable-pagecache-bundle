@@ -9,6 +9,8 @@ use SimplyTestable\PageCacheBundle\Model\CacheValidatorIdentifier;
 use SimplyTestable\PageCacheBundle\Services\CacheableResponseFactory;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorHeadersService;
 use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\Factory as CacheValidatorIdentifierFactory;
+use SimplyTestable\PageCacheBundle\Services\CacheValidatorIdentifier\ParametersFactory
+    as CacheValidatorIdentifierParametersFactory;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use webignition\SimplyTestableUserManagerInterface\UserManagerInterface;
@@ -37,6 +39,7 @@ class CacheableResponseFactoryTest extends TestCase
         $cacheableResponseFactory = new CacheableResponseFactory(
             $cacheValidatorHeadersService,
             $cacheValidatorIdentifierFactory,
+            new CacheValidatorIdentifierParametersFactory(),
             $userManager
         );
 
