@@ -1,5 +1,8 @@
 {
     "name": "webignition/simplytestable-pagecache-bundle",
+    "description": "Symfony 4 bundle for creating/validating cacheable responses",
+    "keywords": ["symfony", "symfony4", "http", "cache", "response"],
+    "homepage": "https://github.com/webignition/simplytestable-pagecache-bundle",
     "type": "symfony-bundle",
     "require": {
         "php": ">=7.2.0",
