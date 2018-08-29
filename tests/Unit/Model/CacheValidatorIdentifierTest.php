@@ -96,7 +96,9 @@ class CacheValidatorIdentifierTest extends TestCase
 
         $this->expectException(\UnexpectedValueException::class);
         $this->expectExceptionCode(CacheValidatorIdentifier::EXCEPTION_CODE_OBJECT_CANNOT_BE_CONVERTED_TO_STRING);
-        $this->expectExceptionMessage('Object of type '. CacheValidatorHeaders::class .' cannot be converted to a string');
+        $this->expectExceptionMessage(
+            'Object of type '. CacheValidatorHeaders::class .' cannot be converted to a string'
+        );
 
         $cacheValidatorIdentifier->__toString();
     }
